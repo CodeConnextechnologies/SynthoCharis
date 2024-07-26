@@ -1,7 +1,9 @@
 "use client";
 import Image from "next/image";
-import { IoMdClose } from "react-icons/io";
-import React, { useState } from "react";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import React, { useRef, useState } from "react";
+import Slider from "react-slick";
 import gallery1 from "../assets/Gallery/g-1.jpg";
 import gallery2 from "../assets/Gallery/g-2.jpg";
 import gallery3 from "../assets/Gallery/g-3.jpg";
@@ -22,8 +24,13 @@ import gallery17 from "../assets/Gallery/g-17.jpg";
 import gallery18 from "../assets/Gallery/g-18.jpg";
 import gallery19 from "../assets/Gallery/g-19.jpg";
 import gallery20 from "../assets/Gallery/g-20.jpg";
+import gallery21 from "../assets/Gallery/g-21.jpg";
+import { MdOutlineHome } from "react-icons/md";
+import { MdKeyboardArrowRight } from "react-icons/md";
+import Link from "next/link";
 
 const images = [
+  gallery21,
   gallery1,
   gallery2,
   gallery3,
@@ -47,101 +54,124 @@ const images = [
 ];
 
 const Page = () => {
-  const [model, setModel] = useState(false);
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const sliderRef = useRef(null);
+  const thumbnailRef = useRef(null);
 
-  const handleImageClick = (index) => {
-    setCurrentIndex(index);
-    setModel(true);
+  const settings = {
+    dots: false,
+    infinite: true,
+    speed: 1000,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    beforeChange: (oldIndex, newIndex) => setCurrentSlide(newIndex),
+    afterChange: (current) => scrollToThumbnail(current),
   };
 
-  const Remove = () => {
-    setModel(false);
+  const handleThumbnailClick = (index) => {
+    setCurrentSlide(index);
+    sliderRef.current.slickGoTo(index);
+    scrollToThumbnail(index);
   };
 
-  const ShowImage = () => {
-    return (
-      <>
-        <div className="mid-content" onClick={Remove}>
-         <div className=" mt-5 pt-5 text-end mx-5 text-light fw-bold" style={{fontSize: "30px"}}>
-         <IoMdClose onClick={Remove} className="mt-5" style={{cursor: "pointer"}} />
-         </div>
-        </div>
-        <div className="container content-gallery">
-          <div id="carouselExample" className="carousel slide">
-            <div className="carousel-inner">
-              {images.map((image, index) => (
-                <div
-                  className={`carousel-item ${
-                    index === currentIndex ? "active" : ""
-                  }`}
-                  key={index}
-                >
-                  <Image
-                    src={image}
-                    className="d-block w-100 rounded-5 cour-image"
-                    height={700}
-                    alt="img"
-                    style={{ filter: "brightness(82%)", objectFit:"cover" }}
-                  />
-                </div>
-              ))}
-            </div>
-            <button
-              className="carousel-control-prev"
-              type="button"
-              data-bs-target="#carouselExample"
-              data-bs-slide="prev"
-            >
-              <span
-                className="carousel-control-prev-icon icons-g"
-                aria-hidden="true"
-              ></span>
-              <span className="visually-hidden">Previous</span>
-            </button>
-            <button
-              className="carousel-control-next"
-              type="button"
-              data-bs-target="#carouselExample"
-              data-bs-slide="next"
-            >
-              <span
-                className="carousel-control-next-icon icons-g"
-                aria-hidden="true"
-              ></span>
-              <span className="visually-hidden">Next</span>
-            </button>
-          </div>
-        </div>
-      </>
-    );
+  const scrollToThumbnail = (index) => {
+    const thumbnailContainer = thumbnailRef.current;
+    const thumbnailElement = thumbnailContainer.children[index];
+    const containerWidth = thumbnailContainer.clientWidth;
+    const thumbnailWidth = thumbnailElement.clientWidth;
+    const scrollPosition =
+      thumbnailElement.offsetLeft - containerWidth / 2 + thumbnailWidth / 2;
+    thumbnailContainer.scrollTo({ left: scrollPosition, behavior: "smooth" });
   };
 
   return (
     <>
       <div className="about">
-        <h1>Gallery</h1>
+        <div className="d-flex flex-column justify-content-end align-items-center mb-5">
+          <h3 className="fs-1 text-capitalize mx-5 fw-bolder">Gallery</h3>
+          <div>
+            <p className="d-flex flex-row justify-content-center align-items-center fw-bolder">
+              <Link href="/" className="text-light">
+                <MdOutlineHome className="fs-4 my-1" />
+              </Link>
+              <Link href="/" className="text-decoration-none text-light">
+                <span className="fs-6">Home</span>
+              </Link>
+              <MdKeyboardArrowRight className="fs-4 mt-1" />
+              <span className="fs-6">Gallery</span>
+            </p>
+          </div>
+        </div>
       </div>
-      <br />
-      <div className="container gallery-content-2">
-        <div className="grid">
-          {images.map((image, index) => (
+      <div
+        className="slider-container container mx-auto"
+        style={{ padding: "10px" }}
+      >
+        <Slider ref={sliderRef} {...settings}>
+          {images.map((url, index) => (
             <div
-              className="grid-items"
               key={index}
-              onClick={() => handleImageClick(index)}
+              style={{
+                padding: "10px",
+                // borderRadius: "20px",
+                position: "relative"
+              }}
+            >
+             <div style={{padding:"10px"}}>
+             <Image
+                src={url}
+                alt={`Slide ${index + 1}`}
+                // style={{
+                //   width: "100%",
+                //   maxHeight: "500px",
+                //   border: "3px solid green",
+                //   borderBottomLeftRadius: "30px",
+                //   borderTopLeftRadius: "100px",
+                //   borderBottomRightRadius: "100px",
+                //   borderTopRightRadius: "30px",
+                //   filter: "brightness(80%)",
+                //   objectFit: "cover",
+                // }}
+                className="g-img"
+              />
+             </div>
+             <div>
+             </div>
+            </div>
+          ))}
+        </Slider>
+        <div
+          className="thumbnail-container container-fluid"
+          ref={thumbnailRef}
+          style={{
+            display: "flex",
+            justifyContent: "start",
+            marginTop: "20px",
+            overflowX: "auto",
+            whiteSpace: "nowrap",
+          }}
+        >
+          {images.map((url, index) => (
+            <div
+              key={index}
+              style={{
+                margin: "3.5px",
+                cursor: "pointer",
+                display: "inline-block",
+              }}
+              onClick={() => handleThumbnailClick(index)}
             >
               <Image
-                src={image}
-                alt={`image-${index + 1}`}
-                className="gallery-img"
+                src={url}
+                alt={`Thumbnail ${index + 1}`}
+                style={{
+                  border: currentSlide === index ? "3px solid green" : "none",
+                }}
+                className="image-fluid thumbline-image"
               />
             </div>
           ))}
         </div>
-        <br />
-        <br />
-        {model && <ShowImage />}
       </div>
     </>
   );
