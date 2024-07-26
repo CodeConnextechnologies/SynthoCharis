@@ -1,0 +1,5 @@
+# netlify.toml file
+[[redirects]]
+  from = "/old-page"
+  to = "/new-page"
+  status = 301
