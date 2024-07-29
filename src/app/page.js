@@ -68,7 +68,7 @@ export default function Home() {
               <SwiperSlide className="swiper">
                 <Image src={one} className="w_img" />
               </SwiperSlide>
-              <SwiperSlide>
+              {/* <SwiperSlide>
                 <Image src={group} className="w_img" />
               </SwiperSlide>
               <SwiperSlide>
@@ -76,7 +76,7 @@ export default function Home() {
               </SwiperSlide>
               <SwiperSlide>
                 <Image src={group} className="w_img" />
-              </SwiperSlide>
+              </SwiperSlide> */}
             </Swiper>
           </div>
         </div>
@@ -178,7 +178,6 @@ export default function Home() {
               </div>
             </div>
           </div>
-          this section change in page.js
         </div>
       </div>
 
