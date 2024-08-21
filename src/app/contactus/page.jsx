@@ -88,8 +88,8 @@ const page = () => {
         <div className="container contact-border">
           <div>
             <h3 className="head">
-              Get in <span style={{ color: "#418E41" }}>touch</span> with
-              us today
+              Get in <span style={{ color: "#418E41" }}>touch</span> with us
+              today
             </h3>
           </div>
           <div className="contact_input">
@@ -127,6 +127,18 @@ const page = () => {
           </div>
         </div>
       </div>
+
+      {/* <div className="contact">
+        <div className="container contact-border">
+          <div>
+            <h3 className="head">
+              Get in <span style={{ color: "#418E41" }}>touch</span> with us
+              today
+            </h3>
+          </div>
+
+        </div>
+      </div> */}
     </div>
   );
 };

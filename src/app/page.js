@@ -18,6 +18,7 @@ import p3 from "./assets/p-3.png";
 import b1 from "./assets/b-1.png";
 import b2 from "./assets/b-2.png";
 import b3 from "./assets/b-3.png";
+
 import Footer from "./component/Footer";
 import img from "./assets/image2.jpg";
 export default function Home() {
