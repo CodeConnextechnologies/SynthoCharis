@@ -275,10 +275,9 @@ body {
   background-position: center;
   background-size: cover;
   display: flex;
-  /* justify-content: center; */
-  /* align-items: center; */
   color: white !important;
 }
+
 .grid {
   display: grid;
   width: 100%;
