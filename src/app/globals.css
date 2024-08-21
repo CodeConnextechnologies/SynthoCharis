@@ -606,6 +606,10 @@ iframe {
   }
 }
 
+.head span {
+  color: #418e41;
+}
+
 .contact_input input {
   font-size: 15px;
   margin: 25px;
