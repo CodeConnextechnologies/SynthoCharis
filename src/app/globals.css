@@ -269,7 +269,8 @@ body {
   width: auto;
   height: 50vh;
   background-image: url("./assets/aboutpage.png"),
-    url("./assets/mainfile2\ 1[1].png");
+    url("./assets/mainfile2%201[1].png");
+
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
