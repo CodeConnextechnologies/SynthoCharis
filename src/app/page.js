@@ -25,7 +25,7 @@ export default function Home() {
   return (
     <>
       <div className="mb-5">
-        <div className="home_con ">
+        {/* <div className="home_con ">
           <div className="container heroelement">
             <div className="row home_row">
               <div className="col-12 col-md-6">
@@ -40,13 +40,13 @@ export default function Home() {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
 
         {/* second part */}
         <br />
         <div className="container">
           <div className="row second-row">
-            <div className="col-md-6 d-flex justify-content-center align-items-center">
+            {/* <div className="col-md-6 d-flex justify-content-center align-items-center">
               <p>
                 Syntho Chirals (P) Ltd have a CGMP manufacturing facility
                 located in Bidar, Karnataka State, 120KM from Hyderabad. We
@@ -59,20 +59,20 @@ export default function Home() {
                 research centers, pharmaceutical companies, and chemical
                 factories in the USA, Europe, and Japan.
               </p>
-            </div>
+            </div> */}
 
             <div className="col-md-6">
-              <Swiper
+              {/* <Swiper
                 spaceBetween={50}
                 slidesPerView={1}
                 loop={true}
                 onSlideChange={() => console.log("slide change")}
                 onSwiper={(swiper) => console.log(swiper)}
-              >
-                <SwiperSlide className="swiper">
+              > */}
+              {/* <SwiperSlide className="swiper">
                   <Image src={one} className="w_img" />
-                </SwiperSlide>
-                {/* <SwiperSlide>
+                </SwiperSlide> */}
+              {/* <SwiperSlide>
                 <Image src={group} className="w_img" />
               </SwiperSlide>
               <SwiperSlide>
@@ -81,7 +81,7 @@ export default function Home() {
               <SwiperSlide>
                 <Image src={group} className="w_img" />
               </SwiperSlide> */}
-              </Swiper>
+              {/* </Swiper> */}
             </div>
           </div>
         </div>
@@ -89,9 +89,9 @@ export default function Home() {
         {/* third part start */}
         <div className="container third_row">
           <div className="row">
-            <div className="col-md-4 pils">
+            {/* <div className="col-md-4 pils">
               <Image src={tablet} style={{ width: "100%" }} />
-            </div>
+            </div> */}
             {/* <div className="col-md-8">
             <div className="container">
               <div className="row">
@@ -136,7 +136,7 @@ export default function Home() {
             </div>
 
           </div> */}
-            <div className="col-md-8">
+            {/* <div className="col-md-8">
               <div className="container">
                 <div className="row">
                   <div className="col-md-4 col-sm-6 col-12 colmax">
@@ -180,7 +180,7 @@ export default function Home() {
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
 
@@ -189,7 +189,7 @@ export default function Home() {
         {/* fourth start */}
 
         {/* fourth -end */}
-        <div className="container fourth">
+        {/* <div className="container fourth">
           <h1>Buisness Unites</h1>
           <div className="row row-data">
             <div className="col-md-4 b-1 d-flex justify-content-center align-items-center">
@@ -225,16 +225,15 @@ export default function Home() {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
-
-      {/* <div className="container d-flex flex-column justify-content-center align-items-center">
+      <div className="container d-flex flex-column justify-content-center align-items-center">
         <Image
           src={img}
           className="image-2"
           style={{ width: "100%", height: "100%" }}
         />
-      </div> */}
+      </div>
     </>
   );
 }
