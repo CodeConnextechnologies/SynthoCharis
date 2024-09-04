@@ -3,7 +3,7 @@
 // import React, { useState } from 'react';
 // import { Button, Col, Container, Form, Row } from 'react-bootstrap';
 // import axios from 'axios';
-// // import signin from "@/assets/login.jpg";  
+// // import signin from "@/assets/login.jpg";
 // // import "@/app/style/auth.css";
 // import { useRouter } from 'next/navigation';
 // import { ToastContainer } from 'react-toastify';
@@ -59,7 +59,7 @@
 //       try {
 //         await axios.post("/api/signUp", formData).then((res) => {
 //             if(res.data.status == "400"){
-//                 setResponseError(res.data.message);  
+//                 setResponseError(res.data.message);
 //                 console.log(res,"res message")
 //                 toast("Sign Up failed");
 //             }else{
@@ -68,12 +68,12 @@
 //               setTimeout(() => {
 //                 router.push("/admin");
 //                 formData.email = ""
-//               },3000); 
+//               },3000);
 //             }
 //         });
 //       } catch (error) {
 //         setResponseError(error.response?.data?.message || 'An error occurred while submitting the form');
-//         toast.error("An error occurred while submitting the form"); 
+//         toast.error("An error occurred while submitting the form");
 //       }
 //     } else {
 //       console.log('Form contains errors');
@@ -82,7 +82,7 @@
 //   return (
 //     <div>
 //       <Container className='mb-0 p-4'>
-//         <Row className='d-flex justify-content-center align-items-center mt-5'> 
+//         <Row className='d-flex justify-content-center align-items-center mt-5'>
 //           <Col md={6} className=' box-containe d-flex justify-content-center align-items-center p-4'>
 //             <div>
 //               <h1 style={{ fontWeight: 800, textAlign: "center", fontSize: "30px" }}>welcome to Sign Up !</h1>
@@ -151,17 +151,27 @@
 // export default SignUpPage;
 
 "use client";
-import React, { useState } from 'react';
-import { Button, Col, Container, Form, Row } from 'react-bootstrap';
-import axios from 'axios';
-import { useRouter } from 'next/navigation';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import React, { useState } from "react";
+import { Button, Col, Container, Form, Row } from "react-bootstrap";
+import axios from "axios";
+import { useRouter } from "next/navigation";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const SignUpPage = () => {
-  const [formData, setFormData] = useState({ email: '', password: '', name: '', date: '' });
-  const [errors, setErrors] = useState({ email: '', password: '', name: '', date: '' });
-  const [responseError, setResponseError] = useState('');
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+    name: "",
+    date: "",
+  });
+  const [errors, setErrors] = useState({
+    email: "",
+    password: "",
+    name: "",
+    date: "",
+  });
+  const [responseError, setResponseError] = useState("");
   const router = useRouter();
 
   const handleChange = (e) => {
@@ -174,25 +184,26 @@ const SignUpPage = () => {
   };
 
   const validateField = (name, value) => {
-    let error = '';
+    let error = "";
     switch (name) {
-      case 'email':
+      case "email":
         if (!value) {
-          error = 'Email is required';
+          error = "Email is required";
         } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(value)) {
-          error = 'Invalid email address';
+          error = "Invalid email address";
         } else {
-          error = '';
+          error = "";
         }
         break;
-      case 'password':
-        error = value.length >= 6 ? '' : 'Password must be at least 6 characters';
+      case "password":
+        error =
+          value.length >= 6 ? "" : "Password must be at least 6 characters";
         break;
-      case 'name':
-        error = value.length >= 6 ? '' : 'Name must be at least 6 characters';
+      case "name":
+        error = value.length >= 6 ? "" : "Name must be at least 6 characters";
         break;
-      case 'date':
-        error = value ? '' : 'Please enter the date of birth';
+      case "date":
+        error = value ? "" : "Please enter the date of birth";
         break;
       default:
         break;
@@ -205,8 +216,9 @@ const SignUpPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const isValid = Object.values(errors).every((error) => error === '') &&
-                    Object.values(formData).every((field) => field !== '');
+    const isValid =
+      Object.values(errors).every((error) => error === "") &&
+      Object.values(formData).every((field) => field !== "");
     if (isValid) {
       try {
         const res = await axios.post("/api/signUp", formData);
@@ -215,27 +227,41 @@ const SignUpPage = () => {
           toast.error("Sign Up failed");
         } else {
           toast.success("Sign Up successful");
-          setFormData({ email: '', password: '', name: '', date: '' }); // Clear the form data
+          setFormData({ email: "", password: "", name: "", date: "" }); // Clear the form data
           setTimeout(() => {
             router.push("/admin");
           }, 3000);
         }
       } catch (error) {
-        setResponseError(error.response?.data?.message || 'An error occurred while submitting the form');
+        setResponseError(
+          error.response?.data?.message ||
+            "An error occurred while submitting the form"
+        );
         toast.error("An error occurred while submitting the form");
       }
     } else {
-      console.log('Form contains errors');
+      console.log("Form contains errors");
     }
   };
 
   return (
     <div>
-      <Container className='mb-0 p-4'>
-        <Row className='d-flex justify-content-center align-items-center mt-5'>
-          <Col md={6} className='box-containe d-flex justify-content-center align-items-center p-4'>
+      <Container className="mb-0 p-4">
+        <Row className="d-flex justify-content-center align-items-center mt-5">
+          <Col
+            md={6}
+            className="box-containe d-flex justify-content-center align-items-center p-4"
+          >
             <div>
-              <h1 style={{ fontWeight: 800, textAlign: "center", fontSize: "30px" }}>Welcome to Sign Up!</h1>
+              <h1
+                style={{
+                  fontWeight: 800,
+                  textAlign: "center",
+                  fontSize: "30px",
+                }}
+              >
+                Welcome to Sign Up!
+              </h1>
               <br />
               <Form onSubmit={handleSubmit}>
                 <Form.Group controlId="formName">
@@ -246,7 +272,9 @@ const SignUpPage = () => {
                     value={formData.name}
                     onChange={handleChange}
                   />
-                  {errors.name && <span className="text-danger">{errors.name}</span>}
+                  {errors.name && (
+                    <span className="text-danger">{errors.name}</span>
+                  )}
                 </Form.Group>
                 <br />
                 <Form.Group controlId="formEmail">
@@ -257,7 +285,9 @@ const SignUpPage = () => {
                     value={formData.email}
                     onChange={handleChange}
                   />
-                  {errors.email && <span className="text-danger">{errors.email}</span>}
+                  {errors.email && (
+                    <span className="text-danger">{errors.email}</span>
+                  )}
                 </Form.Group>
                 <br />
                 <Form.Group controlId="formDate">
@@ -268,7 +298,9 @@ const SignUpPage = () => {
                     value={formData.date}
                     onChange={handleChange}
                   />
-                  {errors.date && <span className="text-danger">{errors.date}</span>}
+                  {errors.date && (
+                    <span className="text-danger">{errors.date}</span>
+                  )}
                 </Form.Group>
                 <br />
                 <Form.Group controlId="formPassword">
@@ -279,12 +311,18 @@ const SignUpPage = () => {
                     value={formData.password}
                     onChange={handleChange}
                   />
-                  {errors.password && <span className="text-danger">{errors.password}</span>}
+                  {errors.password && (
+                    <span className="text-danger">{errors.password}</span>
+                  )}
                 </Form.Group>
                 <br />
-                {responseError && <div className="text-danger">{responseError}</div>}
+                {responseError && (
+                  <div className="text-danger">{responseError}</div>
+                )}
 
-                <Button type="submit" className='button'>Sign Up</Button>
+                <Button type="submit" className="button">
+                  Sign Up
+                </Button>
                 <ToastContainer />
               </Form>
             </div>

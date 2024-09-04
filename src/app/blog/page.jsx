@@ -39,7 +39,7 @@
 //       setAuthor('');
 //       setImages([]);
 //       setErrorMessage('');
-      
+
 //       // Optionally, navigate to a different route or display a success message
 //     } catch (error) {
 //       if (error.response && error.response.data.message) {
@@ -59,7 +59,7 @@
 //       <h2 className='fs-2 text-center text-success'>Post  Blog</h2>
 //         <label className='fs-6 fw-medium text-dark my-1'>Title:</label>
 //         <input type="text" className='input' value={title} onChange={(e) => setTitle(e.target.value)} required />
-        
+
 //         <label className='fs-6 fw-medium text-dark my-1'>Content (JSON array):</label>
 //         <textarea value={content}   onChange={(e) => setContent(e.target.value)} required />
 
@@ -115,19 +115,18 @@
 
 // export default PostBlogForm;
 
-
 "use client";
-import React, { useState } from 'react';
-import { toast, ToastContainer } from 'react-toastify'; // Uncomment if using toast notifications
-import axios from 'axios';
-import { Button, Col, Container, Form, Row } from 'react-bootstrap';
+import React, { useState } from "react";
+import { toast, ToastContainer } from "react-toastify"; // Uncomment if using toast notifications
+import axios from "axios";
+import { Button, Col, Container, Form, Row } from "react-bootstrap";
 
 const PostBlogForm = () => {
-  const [title, setTitle] = useState('');
-  const [content, setContent] = useState('');
-  const [author, setAuthor] = useState('');
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+  const [author, setAuthor] = useState("");
   const [images, setImages] = useState([]);
-  const [errorMessage, setErrorMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleImageChange = (e) => {
     const files = Array.from(e.target.files);
@@ -138,73 +137,105 @@ const PostBlogForm = () => {
     e.preventDefault();
     try {
       const formData = new FormData();
-      formData.append('title', title);
-      formData.append('content', JSON.stringify(content));
-      formData.append('author', author);
+      formData.append("title", title);
+      formData.append("content", JSON.stringify(content));
+      formData.append("author", author);
       images.forEach((image, index) => {
-        formData.append('images', image); // Changed 'image' to 'images' to match common convention
+        formData.append("images", image); // Changed 'image' to 'images' to match common convention
       });
 
-      await axios.post('/api/blogs', formData, {
+      await axios.post("/api/blogs", formData, {
         headers: {
-          'Content-Type': 'multipart/form-data'
-        }
+          "Content-Type": "multipart/form-data",
+        },
       });
 
       // Clear form after successful submission
-      setTitle('');
-      setContent('');
-      setAuthor('');
+      setTitle("");
+      setContent("");
+      setAuthor("");
       setImages([]);
-      setErrorMessage('');
+      setErrorMessage("");
 
       // Optionally, display a success message
-      toast.success('Blog posted successfully!'); // Uncomment if using toast notifications
+      toast.success("Blog posted successfully!"); // Uncomment if using toast notifications
 
       // Optionally, navigate to a different route
       // Router.push('/success'); // Replace with actual navigation code
-
     } catch (error) {
       if (error.response && error.response.data.message) {
         setErrorMessage(error.response.data.message);
       } else {
-        setErrorMessage('Something went wrong. Please try again later.');
+        setErrorMessage("Something went wrong. Please try again later.");
       }
 
       // Optionally, display an error message
-      toast.error('Failed to post blog.'); // Uncomment if using toast notifications
+      toast.error("Failed to post blog."); // Uncomment if using toast notifications
     }
   };
 
   return (
     <>
-      <Container className='p-4'>
-        <Row className='d-flex justify-content-center align-items-center mt-5 pt-2'>
-          <Col md={6} className='box-containe d-flex justify-content-center align-items-center p-4'>
-            <Form onSubmit={handleSubmit} className='form-content'>
-              <h2 className='fs-2 text-center text-dark fw-bolder'>Post Blog</h2>
-              {errorMessage && <div className="error text-danger my-3 text-center">{errorMessage}</div>}
+      <Container className="p-4">
+        <Row className="d-flex justify-content-center align-items-center mt-5 pt-2">
+          <Col
+            md={6}
+            className="box-containe d-flex justify-content-center align-items-center p-4"
+          >
+            <Form onSubmit={handleSubmit} className="form-content">
+              <h2 className="fs-2 text-center text-dark fw-bolder">
+                Post Blog
+              </h2>
+              {errorMessage && (
+                <div className="error text-danger my-3 text-center">
+                  {errorMessage}
+                </div>
+              )}
               <Form.Group controlId="formTitle">
                 <Form.Label>Title</Form.Label>
-                <Form.Control type="text" className='input' value={title} onChange={(e) => setTitle(e.target.value)} required />
+                <Form.Control
+                  type="text"
+                  className="input"
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+                  required
+                />
               </Form.Group>
               <br />
               <Form.Group controlId="formContent">
                 <Form.Label>Content</Form.Label>
-                <Form.Control as="textarea" value={content} onChange={(e) => setContent(e.target.value)} required />
+                <Form.Control
+                  as="textarea"
+                  value={content}
+                  onChange={(e) => setContent(e.target.value)}
+                  required
+                />
               </Form.Group>
               <br />
               <Form.Group controlId="formAuthor">
                 <Form.Label>Author</Form.Label>
-                <Form.Control type="text" className='input' value={author} onChange={(e) => setAuthor(e.target.value)} required />
+                <Form.Control
+                  type="text"
+                  className="input"
+                  value={author}
+                  onChange={(e) => setAuthor(e.target.value)}
+                  required
+                />
               </Form.Group>
               <br />
               <Form.Group controlId="formImages">
                 <Form.Label>Upload Images:</Form.Label>
-                <Form.Control type="file" className='input' onChange={handleImageChange} multiple />
+                <Form.Control
+                  type="file"
+                  className="input"
+                  onChange={handleImageChange}
+                  multiple
+                />
               </Form.Group>
               <br />
-              <Button type="submit" className='button'>Post Blog</Button>
+              <Button type="submit" className="button">
+                Post Blog
+              </Button>
               <ToastContainer /> {/* Uncomment if using toast notifications */}
             </Form>
           </Col>
